@@ -10,6 +10,6 @@ import Interface
 
 
 
-
-words.checkUserInput()
+words.chooseWord()
+words.checkUserInput("green")
 Interface.interface()

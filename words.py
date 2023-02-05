@@ -13,9 +13,9 @@ def CSV():
 
 def chooseWord():
     wordlist = CSV()
+    global chWord
     chWord = random.choice(wordlist)
     print(chWord)
-    return chWord
 
 
 def userInput():
@@ -23,17 +23,16 @@ def userInput():
     return guess
 
 
-def checkUserInput():
-    secret_word = chooseWord()
-    print(f"Ik raad aan om {secret_word} te raden")
-    guess = userInput()
+def checkUserInput(input):
 
-    if len(guess) != 5:
+    print(f"Ik raad aan om {chWord} te raden")
+
+    if len(input) != 5:
         print("not enough letters")
         return False
     print("Yes")
 
-    if guess in CSV():
+    if input in CSV():
         print("good in the list")
     else:
         return False
