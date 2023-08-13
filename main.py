@@ -14,4 +14,3 @@ import Interface
 
 words.chooseWord()
 Interface.interfaceStartup(Nguess,Nletters)
-words.checkUserInput()

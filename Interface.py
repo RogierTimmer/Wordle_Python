@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 
+import words
+
 root = Tk()
 WordTyped = StringVar()
 
@@ -31,4 +33,4 @@ def interfaceStartup(Nguess,Nletters):
 def ButtonClicked():
     msg = f'Your input: {WordTyped.get()}'
     print(msg)
-    return WordTyped.get
+    words.checkUserInput()

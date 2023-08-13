@@ -20,16 +20,17 @@ def chooseWord():
     print(ChosenRandomWord)  # TODO remove
 
 
+
 def checkUserInput():
-    print(f"Ik raad aan om {ChosenRandomWord} te raden")    # TODO remove
-    input = Interface.ButtonClicked()
+    input = Interface.WordTyped.get()
+    print(input)
     if len(input) != 5:
         print("not enough letters")
         return False
-    print("Yes")
 
-    if input in CSV():
-        print("good in the list")
-    else:
+    if not input in CSV():
+        print("not in list")
         return False
+
+    print("Alle test volstaan")
     return True
