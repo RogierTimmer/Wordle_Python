@@ -1,10 +1,12 @@
 import csv
 import random
 
+import Interface
+
 
 def CSV():
     wordlist = []
-    with open("valid-words.csv") as csvfile:
+    with open("valid-words-test.csv") as csvfile:   # TODO have good CVS
         reader = csv.reader(csvfile)
         for row in reader:
             wordlist.append(row[0])
@@ -13,20 +15,14 @@ def CSV():
 
 def chooseWord():
     wordlist = CSV()
-    global chWord
-    chWord = random.choice(wordlist)
-    print(chWord)
+    global ChosenRandomWord
+    ChosenRandomWord = random.choice(wordlist)
+    print(ChosenRandomWord)  # TODO remove
 
 
-def userInput():
-    guess = input("Choose a word: ")
-    return guess
-
-
-def checkUserInput(input):
-
-    print(f"Ik raad aan om {chWord} te raden")
-
+def checkUserInput():
+    print(f"Ik raad aan om {ChosenRandomWord} te raden")    # TODO remove
+    input = Interface.ButtonClicked()
     if len(input) != 5:
         print("not enough letters")
         return False

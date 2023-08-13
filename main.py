@@ -2,7 +2,9 @@
 import csv
 import random
 
-Nwords = 6
+
+Nguess = 6
+Nletters = 5
 
 import words
 import Interface
@@ -11,5 +13,5 @@ import Interface
 
 
 words.chooseWord()
-words.checkUserInput("green")
-Interface.interface()
+Interface.interfaceStartup(Nguess,Nletters)
+words.checkUserInput()

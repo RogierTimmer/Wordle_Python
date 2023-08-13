@@ -1,34 +1,34 @@
 from tkinter import *
-from tkinter import messagebox
+from tkinter import ttk
 
-import words
+root = Tk()
+WordTyped = StringVar()
 
+def interfaceStartup(Nguess,Nletters):
 
-def interface():
-    root = Tk()
+    root.title("Wordle")
+    for y in range(Nguess):
+        root.columnconfigure(y, weight=1, minsize=30)
+        root.rowconfigure(y, weight=1, minsize=40)
+        for x in range(Nletters):
+            frame = ttk.Frame(root, borderwidth=5, relief="ridge")
+            frame.grid(column=x, row=y, sticky=(N, S, E, W))
 
-    green = "77b700"
-    orange = "fc930a"
-    red = "fc930a"
+    namelbl = ttk.Label(root,text="Guess")
+    name = ttk.Entry(root, textvariable=WordTyped)
+    ok = ttk.Button(root, text="Okay", command=ButtonClicked)
 
-    word = words.userInput()
-    words.checkUserInput(word)
+    ok.bind()
 
-    wordInput = Entry(root)
-    wordInput.grid(row=999, column=0, padx=10, pady=10, columnspan=3)
+    root.columnconfigure(5, weight=1)
 
-    def Guess():
-        global word
-        guess = wordInput.get()
-        text = Label(root, text=guess).grid(row=0, column=0)
-
-        if not words.checkUserInput(guess):
-            messagebox.showerror("kutfeut doe een goed woord!","kutfeut doe een goed woord!")
-        return
-
-    wordEnterButton = Button(root, text="Guess", command=Guess)
-    wordEnterButton.grid(row=999, column=3, columnspan=2)
+    namelbl.grid(column=5, row=0, sticky=(N, W), padx=5)
+    name.grid(column=5, row=1, sticky=(N,E,W), pady=5, padx=5)
+    ok.grid(column=5, row=3)
 
     root.mainloop()
 
-    return
+def ButtonClicked():
+    msg = f'Your input: {WordTyped.get()}'
+    print(msg)
+    return WordTyped.get
