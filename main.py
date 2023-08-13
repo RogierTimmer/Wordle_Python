@@ -12,5 +12,7 @@ import Interface
 
 
 
-words.chooseWord()
-Interface.interfaceStartup(Nguess,Nletters)
+ChoosenWord = words.chooseWord()
+print(ChoosenWord)
+
+Interface.interfaceStartup(Nguess,Nletters,ChoosenWord)

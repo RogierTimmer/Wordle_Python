@@ -15,14 +15,26 @@ def CSV():
 
 def chooseWord():
     wordlist = CSV()
-    global ChosenRandomWord
     ChosenRandomWord = random.choice(wordlist)
-    print(ChosenRandomWord)  # TODO remove
+    return ChosenRandomWord
 
 
+def ButtonClicked(RandomChoosenWord):
+    TypedWord = Interface.WordTyped.get()
+    msg = f'Your input: {TypedWord}'
+    print(RandomChoosenWord,"RandomWord")
+    print(msg)
+    temp = checkUserInput(TypedWord)
 
-def checkUserInput():
-    input = Interface.WordTyped.get()
+    if temp is False:
+        print("Please use a correct word")
+        # TODO add a thing to make sure that a new word can be typed
+
+    correctInput(RandomChoosenWord)
+
+
+def checkUserInput(TypedWord):
+    input = TypedWord
     print(input)
     if len(input) != 5:
         print("not enough letters")
@@ -32,5 +44,11 @@ def checkUserInput():
         print("not in list")
         return False
 
-    print("Alle test volstaan")
+    print("All test succeeded")
     return True
+
+def correctInput(RandomchoosenWord):
+    input = Interface.WordTyped.get()
+    Word = RandomchoosenWord
+    print(Word)
+
