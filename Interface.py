@@ -18,9 +18,9 @@ def interfaceStartup(Nguess,Nletters,RandomChoosenword):
 
     namelbl = ttk.Label(root,text="Guess")
     name = ttk.Entry(root, textvariable=WordTyped)
-    ok = ttk.Button(root, text="Okay", command=words.ButtonClicked(RandomChoosenword))
+    ok = ttk.Button(root, text="Okay", command=lambda: words.ButtonClicked(RandomChoosenword))
 
-    ok.bind()
+    # ok.bind()
 
     root.columnconfigure(5, weight=1)
 
