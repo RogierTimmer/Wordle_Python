@@ -6,7 +6,7 @@ import words
 root = Tk()
 WordTyped = StringVar()
 
-def interfaceStartup(Nguess,Nletters,RandomChoosenword):
+def interfaceStartup(Nguess,Nletters,RandomChoosenword,roundcount):
 
     root.title("Wordle")
     for y in range(Nguess):
@@ -18,7 +18,7 @@ def interfaceStartup(Nguess,Nletters,RandomChoosenword):
 
     namelbl = ttk.Label(root,text="Guess")
     name = ttk.Entry(root, textvariable=WordTyped)
-    ok = ttk.Button(root, text="Okay", command=lambda: words.ButtonClicked(RandomChoosenword))
+    ok = ttk.Button(root, text="Okay", command=lambda: words.ButtonClicked(RandomChoosenword,roundcount))
 
     # ok.bind()
 

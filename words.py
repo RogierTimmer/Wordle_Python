@@ -1,8 +1,6 @@
 import csv
 import random
-import numpy
 import Interface
-
 
 def CSV():
     wordlist = []
@@ -20,7 +18,8 @@ def chooseWord():
     return ChosenRandomWord
 
 
-def ButtonClicked(RandomChoosenWord):
+
+def ButtonClicked(RandomChoosenWord, roundcount):
     print('Button Clicked!')
     TypedWord = Interface.WordTyped.get()
     msg = f'Your input: {TypedWord}'
@@ -34,10 +33,12 @@ def ButtonClicked(RandomChoosenWord):
         return
 
     correctInput(RandomChoosenWord)
+    Rounds = RoundCounter()
+    print(f"RoundCounter.counter = {RoundCounter.counter}")
+    print(f"Can we go another round: {Rounds}")
 
 
 def checkUserInput(TypedWord):
-    return
     input = TypedWord
     print(input)
     if len(input) != 5:
@@ -59,29 +60,30 @@ def correctInput(RandomchoosenWord):
     word = list(word)
     print(len(input)," ",len(word))
     correction = [0,0,0,0,0]
-    #numpy.array(correction)    # TODO remove
     copyWord = word
 
     #if the letter is in the right spot: 3; in the word but in the wrong place: 2; not in the word:1
 
     for i in range(5):
-        print(f"i: {i}")
         if input[i] == word[i]:
             correction[i] = 3
             copyWord[i] = 5
-            print(f"Copyword: {copyWord}")
         elif input[i] in word:
             for j in range(5):
-                print(f"j: {j}")
                 if input[i] == copyWord[j]:
                     correction[i] = 2
                     copyWord[j] = 5 # such that that letter is removed from checking again
-                    print(f"Copyword: {copyWord}")
-                    print(f"Correction: {correction}")
                     break
                 if j == 4:
                     correction[i] = 1
         else:
             correction[i] = 1
-    print(correction)
     return correction
+
+def RoundCounter():
+    RoundCounter.counter += 1
+    if RoundCounter.counter <= 5:
+        return True
+    else:
+        return False
+RoundCounter.counter = 0

@@ -9,10 +9,10 @@ Nletters = 5
 import words
 import Interface
 
-
+roundcount = 0
 
 
 ChoosenWord = words.chooseWord()
 print(ChoosenWord)
 
-Interface.interfaceStartup(Nguess,Nletters,ChoosenWord)
+Interface.interfaceStartup(Nguess,Nletters,ChoosenWord,roundcount)
