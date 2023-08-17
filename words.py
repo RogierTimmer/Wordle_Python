@@ -1,5 +1,7 @@
 import csv
 import random
+from tkinter import messagebox
+
 import Interface
 
 def CSV():
@@ -29,7 +31,6 @@ def ButtonClicked(RandomChoosenWord, roundcount):
 
     if temp is False:
         print("Please use a correct word")
-        # TODO add a thing to make sure that a new word can be typed
         return
 
     correctInput(RandomChoosenWord)
@@ -42,11 +43,11 @@ def checkUserInput(TypedWord):
     input = TypedWord
     print(input)
     if len(input) != 5:
-        print("not enough letters")
+        messagebox.showerror("input error", "the word does not contain 5 letters")
         return False
-
+    input = input.lower()
     if not input in CSV():
-        print("not in list")
+        messagebox.showerror("input error", "word does not exist")
         return False
 
     print("All test succeeded")
@@ -58,7 +59,6 @@ def correctInput(RandomchoosenWord):
     print(word,"is the random word and this is the input word",input)
     input = list(input)
     word = list(word)
-    print(len(input)," ",len(word))
     correction = [0,0,0,0,0]
     copyWord = word
 
