@@ -14,7 +14,6 @@ def CSV():
 
 
 def chooseWord():
-    print('Choose Word!')
     wordlist = CSV()
     ChosenRandomWord = random.choice(wordlist)
     return ChosenRandomWord
@@ -22,27 +21,22 @@ def chooseWord():
 
 
 def ButtonClicked(RandomChoosenWord, roundcount):
-    print('Button Clicked!')
-    TypedWord = Interface.WordTyped.get()
-    msg = f'Your input: {TypedWord}'
-    print(RandomChoosenWord,"RandomWord")
-    print(msg)
-    temp = checkUserInput(TypedWord)
+    if RoundCounter.counter <= 5:
+        TypedWord = Interface.WordTyped.get()
+        temp = checkUserInput(TypedWord)
 
-    if temp is False:
-        print("Please use a correct word")
-        return
+        if temp is False:
+            print("Please use a correct word")
+            return
 
-    correction = correctInput(RandomChoosenWord)
-    Rounds = RoundCounter()
-    print(f"RoundCounter.counter = {RoundCounter.counter}")
-    print(f"Can we go another round: {Rounds}")
-    Interface.updateInterface(correction, Rounds)
-
+        correction = correctInput(RandomChoosenWord)
+        Rounds = RoundCounter()
+        Interface.updateInterface(correction, Rounds)
+    else:
+        messagebox.showerror("Lose", "Unfortunately you lost the game...")
 
 def checkUserInput(TypedWord):
     input = TypedWord
-    print(input)
     if len(input) != 5:
         messagebox.showerror("input error", "the word does not contain 5 letters")
         return False
@@ -51,13 +45,11 @@ def checkUserInput(TypedWord):
         messagebox.showerror("input error", "word does not exist")
         return False
 
-    print("All test succeeded")
     return True
 
 def correctInput(RandomchoosenWord):
     input = Interface.WordTyped.get()
     word = RandomchoosenWord
-    print(word,"is the random word and this is the input word",input)
     input = list(input)
     word = list(word)
     correction = [0,0,0,0,0]

@@ -19,9 +19,12 @@ def interfaceStartup(Nguess,Nletters,RandomChoosenword,roundcount):
 
             label =Label(master=frame, text=" ")
             label.pack()
-            frames.append(frame)
+            word_frames.append((frame, label))
+        frames.append(word_frames)
+    #print(frames)
     namelbl = ttk.Label(root,text="Guess")
     name = ttk.Entry(root, textvariable=WordTyped)
+    root.bind("<Return>", lambda e: (words.ButtonClicked(RandomChoosenword, roundcount)))
     ok = ttk.Button(root, text="Okay", command=lambda: words.ButtonClicked(RandomChoosenword,roundcount))
 
     # ok.bind()
@@ -36,8 +39,9 @@ def interfaceStartup(Nguess,Nletters,RandomChoosenword,roundcount):
 
 def updateInterface(correction,round):
     global frames, label
-    for i in range(5):
-        number = 5*words.RoundCounter.counter+i-5
-        frames[number]['background'] = correction[i]
-    #LABEL = frames[0]
-    #LABEL.config(text="E")
+    for j in range(5):
+        i = words.RoundCounter.counter - 1
+        frame, label = frames[i][j]
+        frame['background'] = correction[j]
+        letters = list(WordTyped.get())
+        label.config(text=letters[j])
