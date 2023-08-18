@@ -33,10 +33,11 @@ def ButtonClicked(RandomChoosenWord, roundcount):
         print("Please use a correct word")
         return
 
-    correctInput(RandomChoosenWord)
+    correction = correctInput(RandomChoosenWord)
     Rounds = RoundCounter()
     print(f"RoundCounter.counter = {RoundCounter.counter}")
     print(f"Can we go another round: {Rounds}")
+    Interface.updateInterface(correction, Rounds)
 
 
 def checkUserInput(TypedWord):
@@ -66,18 +67,18 @@ def correctInput(RandomchoosenWord):
 
     for i in range(5):
         if input[i] == word[i]:
-            correction[i] = 3
+            correction[i] = 'green'
             copyWord[i] = 5
         elif input[i] in word:
             for j in range(5):
                 if input[i] == copyWord[j]:
-                    correction[i] = 2
+                    correction[i] = 'yellow'
                     copyWord[j] = 5 # such that that letter is removed from checking again
                     break
                 if j == 4:
-                    correction[i] = 1
+                    correction[i] = 'red'
         else:
-            correction[i] = 1
+            correction[i] = 'red'
     return correction
 
 def RoundCounter():
