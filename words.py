@@ -32,6 +32,10 @@ def ButtonClicked(RandomChoosenWord, roundcount):
         correction = correctInput(RandomChoosenWord)
         Rounds = RoundCounter()
         Interface.updateInterface(correction, Rounds)
+        if WinState() == True:
+            messagebox.showerror("Win","You have won the game! Congratulations")
+            exit()
+
     else:
         messagebox.showerror("Lose", "Unfortunately you lost the game...")
 
@@ -48,6 +52,7 @@ def checkUserInput(TypedWord):
     return True
 
 def correctInput(RandomchoosenWord):
+    global correction
     input = Interface.WordTyped.get()
     word = RandomchoosenWord
     input = list(input)
@@ -80,3 +85,10 @@ def RoundCounter():
     else:
         return False
 RoundCounter.counter = 0
+
+def WinState():
+    global correction
+    if correction == ['green','green','green','green','green']:
+        return True
+    else:
+        return False
