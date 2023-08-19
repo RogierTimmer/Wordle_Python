@@ -21,13 +21,11 @@ def interfaceStartup(Nguess,Nletters,RandomChoosenword,roundcount):
             label.pack()
             word_frames.append((frame, label))
         frames.append(word_frames)
-    #print(frames)
     namelbl = ttk.Label(root,text="Guess")
     name = ttk.Entry(root, textvariable=WordTyped)
     root.bind("<Return>", lambda e: (words.ButtonClicked(RandomChoosenword, roundcount)))
     ok = ttk.Button(root, text="Okay", command=lambda: words.ButtonClicked(RandomChoosenword,roundcount))
 
-    # ok.bind()
 
     root.columnconfigure(5, weight=1)
 

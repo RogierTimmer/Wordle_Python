@@ -37,7 +37,8 @@ def ButtonClicked(RandomChoosenWord, roundcount):
             exit()
 
     else:
-        messagebox.showerror("Lose", "Unfortunately you lost the game...")
+        messagebox.showerror("Lose", f"Unfortunately you did not guess the correct word. The word was \"{RandomChoosenWord}\"")
+        exit()
 
 def checkUserInput(TypedWord):
     input = TypedWord
