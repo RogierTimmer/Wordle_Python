@@ -5,7 +5,7 @@ import Interface
 
 
 
-def CSV():
+def CSV():      #reads the csv file
     wordlist = []
     with open("valid-words.csv") as csvfile:
         reader = csv.reader(csvfile)
@@ -14,7 +14,7 @@ def CSV():
     return wordlist
 
 
-def chooseWord(nguess,nletters):
+def chooseWord(nguess,nletters):    #chooses a random word
     global Nguess, Nletters
     Nguess = nguess
     Nletters = nletters
@@ -24,7 +24,7 @@ def chooseWord(nguess,nletters):
 
 
 
-def buttonClicked(RandomChoosenWord):
+def buttonClicked(RandomChoosenWord):       #logic when the button is clicked
     if RoundCounter.counter <= Nletters:
         TypedWord = Interface.WordTyped.get()
         temp = checkUserInput(TypedWord)
@@ -34,7 +34,7 @@ def buttonClicked(RandomChoosenWord):
 
         correction = correctInput(RandomChoosenWord)
         Rounds = RoundCounter()
-        Interface.updateInterface(correction, Rounds)
+        Interface.updateInterface(correction)
         if WinState() == True:
             messagebox.showerror("Win","You have won the game! Congratulations")
             exit()
@@ -43,7 +43,7 @@ def buttonClicked(RandomChoosenWord):
         messagebox.showerror("Lose", f"Unfortunately you did not guess the correct word. The word was \"{RandomChoosenWord}\"")
         exit()
 
-def checkUserInput(TypedWord):
+def checkUserInput(TypedWord):  #checkes user input if valid
     input = TypedWord
     if len(input) != Nletters:
         messagebox.showerror("input error", "the word does not contain 5 letters")
@@ -55,7 +55,7 @@ def checkUserInput(TypedWord):
 
     return True
 
-def correctInput(RandomchoosenWord):
+def correctInput(RandomchoosenWord):    #corrects the user input
     global correction
     input = Interface.WordTyped.get()
     word = RandomchoosenWord
@@ -64,7 +64,7 @@ def correctInput(RandomchoosenWord):
     correction = [0]*Nletters
     copyWord = word
 
-    #if the letter is in the right spot: 3; in the word but in the wrong place: 2; not in the word:1
+    #if the letter is in the right spot: 'green'; in the word but in the wrong place: 'yellow'; not in the word: 'red'
 
     for i in range(len(word)):
         if input[i] == word[i]:
@@ -80,7 +80,7 @@ def correctInput(RandomchoosenWord):
             correction[i] = 'red'
     return correction
 
-def RoundCounter():
+def RoundCounter(): #counts the rounds and knows when the rounds are over
     RoundCounter.counter += 1
     if RoundCounter.counter <= Nletters:
         return True
@@ -88,7 +88,7 @@ def RoundCounter():
         return False
 RoundCounter.counter = 0
 
-def WinState():
+def WinState():     #looks if the user won the game
     global correction
     if correction == ['green']*Nletters:
         return True
