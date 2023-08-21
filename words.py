@@ -1,8 +1,9 @@
 import csv
 import random
 from tkinter import messagebox
-
 import Interface
+
+
 
 def CSV():
     wordlist = []
@@ -13,20 +14,22 @@ def CSV():
     return wordlist
 
 
-def chooseWord():
+def chooseWord(nguess,nletters):
+    global Nguess, Nletters
+    Nguess = nguess
+    Nletters = nletters
     wordlist = CSV()
     ChosenRandomWord = random.choice(wordlist)
     return ChosenRandomWord
 
 
 
-def ButtonClicked(RandomChoosenWord, roundcount):
-    if RoundCounter.counter <= 5:
+def buttonClicked(RandomChoosenWord):
+    if RoundCounter.counter <= Nletters:
         TypedWord = Interface.WordTyped.get()
         temp = checkUserInput(TypedWord)
 
         if temp is False:
-            print("Please use a correct word")
             return
 
         correction = correctInput(RandomChoosenWord)
@@ -42,7 +45,7 @@ def ButtonClicked(RandomChoosenWord, roundcount):
 
 def checkUserInput(TypedWord):
     input = TypedWord
-    if len(input) != 5:
+    if len(input) != Nletters:
         messagebox.showerror("input error", "the word does not contain 5 letters")
         return False
     input = input.lower()
@@ -58,30 +61,28 @@ def correctInput(RandomchoosenWord):
     word = RandomchoosenWord
     input = list(input)
     word = list(word)
-    correction = [0,0,0,0,0]
+    correction = [0]*Nletters
     copyWord = word
 
     #if the letter is in the right spot: 3; in the word but in the wrong place: 2; not in the word:1
 
-    for i in range(5):
+    for i in range(len(word)):
         if input[i] == word[i]:
             correction[i] = 'green'
-            copyWord[i] = 5
+            copyWord[i] = 5 # such that that letter is removed from checking again
         elif input[i] in word:
-            for j in range(5):
+            for j in range(len(word)):
                 if input[i] == copyWord[j]:
                     correction[i] = 'yellow'
                     copyWord[j] = 5 # such that that letter is removed from checking again
                     break
-                if j == 4:
-                    correction[i] = 'red'
         else:
             correction[i] = 'red'
     return correction
 
 def RoundCounter():
     RoundCounter.counter += 1
-    if RoundCounter.counter <= 5:
+    if RoundCounter.counter <= Nletters:
         return True
     else:
         return False
@@ -89,7 +90,7 @@ RoundCounter.counter = 0
 
 def WinState():
     global correction
-    if correction == ['green','green','green','green','green']:
+    if correction == ['green']*Nletters:
         return True
     else:
         return False

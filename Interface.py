@@ -6,8 +6,9 @@ import words
 root = Tk()
 WordTyped = StringVar()
 frames = []
-def interfaceStartup(Nguess,Nletters,RandomChoosenword,roundcount):
-    global frames, label
+def interfaceStartup(Nguess,nletters,RandomChoosenword):
+    global frames, label, Nletters
+    Nletters = nletters
     root.title("Wordle")
     for y in range(Nguess):
         word_frames = []
@@ -23,21 +24,21 @@ def interfaceStartup(Nguess,Nletters,RandomChoosenword,roundcount):
         frames.append(word_frames)
     namelbl = ttk.Label(root,text="Guess")
     name = ttk.Entry(root, textvariable=WordTyped)
-    root.bind("<Return>", lambda e: (words.ButtonClicked(RandomChoosenword, roundcount)))
-    ok = ttk.Button(root, text="Okay", command=lambda: words.ButtonClicked(RandomChoosenword,roundcount))
+    root.bind("<Return>", lambda e: (words.buttonClicked(RandomChoosenword)))
+    ok = ttk.Button(root, text="Okay", command=lambda: words.buttonClicked(RandomChoosenword))
 
 
     root.columnconfigure(5, weight=1)
 
-    namelbl.grid(column=5, row=0, sticky=(N, W), padx=5)
-    name.grid(column=5, row=1, sticky=(N,E,W), pady=5, padx=5)
-    ok.grid(column=5, row=3)
+    namelbl.grid(column=Nletters, row=0, sticky=(N, W), padx=5)
+    name.grid(column=Nletters, row=1, sticky=(N,E,W), pady=5, padx=5)
+    ok.grid(column=Nletters, row=3)
 
     root.mainloop()
 
 def updateInterface(correction,round):
-    global frames, label
-    for j in range(5):
+    global frames, label, Nletters
+    for j in range(Nletters):
         i = words.RoundCounter.counter - 1
         frame, label = frames[i][j]
         frame['background'] = correction[j]

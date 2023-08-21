@@ -1,6 +1,6 @@
 # This is a script for wordle using Python
-import csv
-import random
+
+global Nguess, Nletters
 
 
 Nguess = 6
@@ -12,7 +12,7 @@ import Interface
 roundcount = 0
 
 
-ChoosenWord = words.chooseWord()
+ChoosenWord = words.chooseWord(Nguess,Nletters)
 print(ChoosenWord)
 
-Interface.interfaceStartup(Nguess,Nletters,ChoosenWord,roundcount)
+Interface.interfaceStartup(Nguess,Nletters,ChoosenWord)
