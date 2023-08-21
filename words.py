@@ -7,7 +7,7 @@ import Interface
 
 def CSV():      #reads the csv file
     wordlist = []
-    with open("valid-words.csv") as csvfile:
+    with open("5_letter_words.csv") as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             wordlist.append(row[0])
